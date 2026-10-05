@@ -14,10 +14,10 @@ public class Stats extends JFrame {
 
 		// Determining the streak
 		String streakstr = "";
-		if (Game.streak == 0) {
+		if (Game.getInstance().getStreak() == 0) {
 			streakstr = "STREAK: 0";
 		} else {
-			streakstr = "STREAK: " + Game.streak + " (P" + Game.recentWinner + ")";
+			streakstr = "STREAK: " + Game.getInstance().getStreak() + " (P" + Game.getInstance().getRecentWinner() + ")";
 		}
 
 		// Creating the stats layout
@@ -50,11 +50,11 @@ public class Stats extends JFrame {
 	private void createStats(String streakstr) {
 
 		// Declaring the stats' labels
-		JLabel p1WinsLabel = new JLabel("P1 WINS: " + Game.p1wins, SwingConstants.CENTER);
-		JLabel p2WinsLabel = new JLabel("P2 WINS: " + Game.p2wins, SwingConstants.CENTER);
+		JLabel p1WinsLabel = new JLabel("P1 WINS: " + Game.getInstance().getP1wins(), SwingConstants.CENTER);
+		JLabel p2WinsLabel = new JLabel("P2 WINS: " + Game.getInstance().getP2wins(), SwingConstants.CENTER);
 		JLabel streakLabel = new JLabel(streakstr, SwingConstants.CENTER);
-		JLabel drawsLabel = new JLabel("DRAWS: " + Game.draws, SwingConstants.CENTER);
-		JLabel gamesPlayedLabel = new JLabel("GAMES PLAYED: " + Game.gamesPlayed, SwingConstants.CENTER);
+		JLabel drawsLabel = new JLabel("DRAWS: " + Game.getInstance().getDraws(), SwingConstants.CENTER);
+		JLabel gamesPlayedLabel = new JLabel("GAMES PLAYED: " + Game.getInstance().getGamesPlayed(), SwingConstants.CENTER);
 
 		// Adding and formatting the stats
 		p1WinsLabel.setFont(new Font("Arial", Font.BOLD, 85));

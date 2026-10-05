@@ -1,4 +1,3 @@
-
 //Import packages
 import javax.swing.*;
 
@@ -7,12 +6,8 @@ public class Main {
 	// Main class
 	public static void main(String[] args) {
 
-		// Set up board
-		for (int r = 0; r < 6; r++) {
-			for (int c = 0; c < 7; c++) {
-				Game.board[r][c] = 0;
-			}
-		}
+		// Reset board matrix and status using the Singleton instance
+		Game.getInstance().resetBoard();
 
 		// Open up the menu
 		Home menu = new Home();

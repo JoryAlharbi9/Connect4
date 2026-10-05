@@ -1,23 +1,78 @@
 
+// ************************ MY REPO ************************
 //Import packages
 import java.util.*;
 import javax.swing.JFrame;
 
 public class Game {
-	// Declare game variables
-	public static int turn = 1;
-	public static boolean winner = false;
-	public static int streak = 0;
-	public static int recentWinner = 0;
-	public static boolean draw = false;
-	public static int[][] board = new int[6][7];
-	public static int p1wins = 0;
-	public static int p2wins = 0;
-	public static int draws = 0;
-	public static int gamesPlayed = 0;
+
+	// 1- Singleton Instance Variable
+	private static Game instance;
+
+	// 2- Private Game Variables (Encapsulation)
+	private int turn = 1;
+	private boolean winner = false;
+	private int streak = 0;
+	private int recentWinner = 0;
+	private boolean draw = false;
+	private int[][] board = new int[6][7];
+	private int p1wins = 0;
+	private int p2wins = 0;
+	private int draws = 0;
+	private int gamesPlayed = 0;
+
+	// 3- Private Constructor
+	private Game() { }
+
+	// 4- Global Access Point
+	public static Game getInstance() {
+		if (instance == null) {
+			instance = new Game();
+		}
+		return instance;
+	}
+
+	// 5- Getters and Setters
+	public int getTurn() { return turn; }
+	public void setTurn(int turn) { this.turn = turn; }
+
+	public boolean isWinner() { return winner; }
+	public void setWinner(boolean winner) { this.winner = winner; }
+
+	public int getStreak() { return streak; }
+	public void setStreak(int streak) { this.streak = streak; }
+
+	public int getRecentWinner() { return recentWinner; }
+	public void setRecentWinner(int recentWinner) { this.recentWinner = recentWinner; }
+
+	public boolean isDraw() { return draw; }
+	public void setDraw(boolean draw) { this.draw = draw; }
+
+	public int[][] getBoard() { return board; }
+	public void setBoard(int[][] board) { this.board = board; }
+
+	public int getP1wins() { return p1wins; }
+	public void incrementP1wins() { this.p1wins++; }
+
+	public int getP2wins() { return p2wins; }
+	public void incrementP2wins() { this.p2wins++; }
+
+	public int getDraws() { return draws; }
+	public void incrementDraws() { this.draws++; }
+
+	public int getGamesPlayed() { return gamesPlayed; }
+	public void incrementGamesPlayed() { this.gamesPlayed++; }
+
+	// reset the board matrix for a new game
+	public void resetBoard() {
+		this.board = new int[6][7];
+		this.winner = false;
+		this.draw = false;
+		this.turn = 1;
+	}
 
 	// User makes a turn class
-	public static void setColumnNumber(int col) {
+	public void setColumnNumber(int col) {
 
 		// Checking if turn is valid
 		col -= 1;
@@ -56,15 +111,15 @@ public class Game {
 		}
 
 		// Set up a new board after turn and close the old window
-		Board board = new Board();
-		board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		board.setSize(1000, 1000);
-		board.setVisible(true);
+		Board boardWindow = new Board();
+		boardWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		boardWindow.setSize(1000, 1000);
+		boardWindow.setVisible(true);
 
 	}
 
 	// Check if someone has won class
-	public static void checkForWin() {
+	private void checkForWin() {
 		// Vertical check
 		for (int c = 0; c < 7; c++) {
 			for (int r = 0; r < 3; r++) {
@@ -106,4 +161,5 @@ public class Game {
 		}
 
 	}
+
 }

@@ -30,9 +30,9 @@ public class Board extends JFrame {
 				// Adding the red and yellow tokens to the board
 				for (int r = 0; r < 6; r++) {
 					for (int c = 0; c < 7; c++) {
-						if (Game.board[r][c] == 0) {
+						if (Game.getInstance().getBoard()[r][c] == 0) {
 							g.setColor(Color.WHITE);
-						} else if (Game.board[r][c] == 1) {
+						} else if (Game.getInstance().getBoard()[r][c] == 1) {
 							g.setColor(Colours.red);
 						} else {
 							g.setColor(Colours.yellow);
@@ -47,11 +47,11 @@ public class Board extends JFrame {
 		// Setting up the title
 		JPanel title = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		// If there is no winner
-		if (!Game.winner) {
+		if (!Game.getInstance().isWinner()) {
 			// If the game is not drawn
-			if (!Game.draw) {
+			if (!Game.getInstance().isDraw()) {
 				// If it's Player 1's turn
-				if (Game.turn % 2 == 1) {
+				if (Game.getInstance().getTurn() % 2 == 1) {
 
 					// Formatting the Player 1's turn title
 					titleR = new JLabel();
@@ -61,7 +61,7 @@ public class Board extends JFrame {
 					title.add(titleR);
 
 					// Changing the user's turn
-					Game.turn++;
+					Game.getInstance().setTurn(Game.getInstance().getTurn() + 1);
 				}
 
 				// If it's Player 2's turn
@@ -75,7 +75,7 @@ public class Board extends JFrame {
 					title.add(titleY);
 
 					// Changing the user's turn
-					Game.turn++;
+					Game.getInstance().setTurn(Game.getInstance().getTurn() + 1);
 				}
 
 				// Adding the column selector buttons
@@ -95,7 +95,7 @@ public class Board extends JFrame {
 					// Adding a colour change when the start button is hovered
 					button.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							Game.setColumnNumber(columnNumber);
+							Game.getInstance().setColumnNumber(columnNumber);
 							dispose();
 						}
 					});
@@ -118,8 +118,8 @@ public class Board extends JFrame {
 				exitButton(50);
 
 				// Updating stats
-				Game.recentWinner = 0;
-				Game.draws++;
+				Game.getInstance().setRecentWinner(0);
+				Game.getInstance().incrementDraws();
 			}
 		}
 
@@ -127,7 +127,7 @@ public class Board extends JFrame {
 		else {
 
 			// If Player 1 won
-			if ((Game.turn - 1) % 2 == 1) {
+			if ((Game.getInstance().getTurn() - 1) % 2 == 1) {
 
 				// Formatting Player 1 win title
 				titleR = new JLabel();
@@ -137,13 +137,13 @@ public class Board extends JFrame {
 				title.add(titleR);
 
 				// Updating stats
-				Game.p1wins++;
-				if (Game.recentWinner == 1 || Game.gamesPlayed == 1) {
-					Game.streak++;
+				Game.getInstance().incrementP1wins();
+				if (Game.getInstance().getRecentWinner() == 1 || Game.getInstance().getGamesPlayed() == 1) {
+					Game.getInstance().setStreak(Game.getInstance().getStreak() + 1);
 				} else {
-					Game.streak = 1;
+					Game.getInstance().setStreak(1);
 				}
-				Game.recentWinner = 1;
+				Game.getInstance().setRecentWinner(1);
 			}
 
 			// If Player 2 won
@@ -157,21 +157,21 @@ public class Board extends JFrame {
 				title.add(titleY);
 
 				// Updating stats
-				Game.p2wins++;
-				if (Game.recentWinner == 2 || Game.gamesPlayed == 1) {
-					Game.streak++;
+				Game.getInstance().incrementP2wins();
+				if (Game.getInstance().getRecentWinner() == 2 || Game.getInstance().getGamesPlayed() == 1) {
+					Game.getInstance().setStreak(Game.getInstance().getStreak() + 1);
 				} else {
-					Game.streak = 1;
+					Game.getInstance().setStreak(1);
 				}
-				Game.recentWinner = 2;
+				Game.getInstance().setRecentWinner(2);
 			}
 
 			// Adding the exit button
 			exitButton(50);
 
 			// Resetting variables
-			Game.winner = false;
-			Game.turn = 1;
+			Game.getInstance().setWinner(false);
+			Game.getInstance().setTurn(1);
 
 		}
 

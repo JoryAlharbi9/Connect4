@@ -59,7 +59,7 @@ public class Home extends JFrame {
 				board.setSize(1000, 1000);
 				board.setVisible(true);
 				dispose();
-				Game.gamesPlayed++;
+				Game.getInstance().incrementGamesPlayed();
 			}
 		});
 
