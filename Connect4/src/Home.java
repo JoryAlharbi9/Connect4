@@ -17,6 +17,9 @@ public class Home extends JFrame {
         // Title the window
         super("Connect 4 | Home");
 
+        // Create Facade for game navigation
+        GameFacade gameFacade = new GameFacade();
+
         // Setting up a new layout
         setLayout(new FlowLayout());
 
@@ -61,14 +64,8 @@ public class Home extends JFrame {
         start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                // Creating a game and closing the menu screen
-                Board board = new Board();
-                board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                board.setSize(1000, 1000);
-                board.setVisible(true);
-                dispose();
-
-                Game.getInstance().incrementGamesPlayed();
+                // Start the game using Facade
+                gameFacade.startGame(Home.this);
             }
         });
 
@@ -90,12 +87,8 @@ public class Home extends JFrame {
         stats.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                // Creating an instance of the stats screen
-                Stats gameStats = new Stats();
-                gameStats.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                gameStats.setSize(1000, 1000);
-                gameStats.setVisible(true);
-                dispose();
+                // Open the statistics screen using Facade
+                gameFacade.showStats(Home.this);
             }
         });
 
