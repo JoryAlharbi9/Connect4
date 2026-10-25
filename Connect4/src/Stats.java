@@ -98,11 +98,9 @@ public class Stats extends JFrame {
 
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Return back to the main menu
-                Main.main(null);
-
-                // Close the board window
-                dispose();
+                // Return to the main menu using Facade
+                GameFacade gameFacade = new GameFacade();
+                gameFacade.showHome(Stats.this);
             }
         });
 

@@ -2,36 +2,37 @@ import javax.swing.*;
 
 public class GameFacade {
 
+    // Open the main menu
+    public void showHome(JFrame currentWindow) {
+        Game.getInstance().resetBoard();
+        openWindow(new Home());
+        if (currentWindow != null) {
+            currentWindow.dispose();
+        }
+    }
+
     // Start a new game
     public void startGame(JFrame currentWindow) {
-
-        // Create the game board
-        Board board = new Board();
-
-        // Configure the board window
-        board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        board.setSize(1000, 1000);
-        board.setVisible(true);
-
-        // Close the current window
+        openWindow(new Board());
         currentWindow.dispose();
-
-        // Update game statistics using Singleton
         Game.getInstance().incrementGamesPlayed();
     }
 
     // Open the statistics screen
     public void showStats(JFrame currentWindow) {
-
-        // Create the statistics screen
-        Stats gameStats = new Stats();
-
-        // Configure the statistics window
-        gameStats.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameStats.setSize(1000, 1000);
-        gameStats.setVisible(true);
-
-        // Close the current window
+        openWindow(new Stats());
         currentWindow.dispose();
+    }
+
+    // Redraw the board after a move
+    public void refreshBoard() {
+        openWindow(new Board());
+    }
+
+    // Shared window setup, written once
+    private void openWindow(JFrame window) {
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setSize(1000, 1000);
+        window.setVisible(true);
     }
 }

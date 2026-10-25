@@ -2,7 +2,6 @@
 // ************************ MY REPO ************************
 //Import packages
 import java.util.*;
-import javax.swing.JFrame;
 
 public class Game {
 
@@ -110,11 +109,9 @@ public class Game {
 			draw = true;
 		}
 
-		// Set up a new board after turn and close the old window
-		Board boardWindow = new Board();
-		boardWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		boardWindow.setSize(1000, 1000);
-		boardWindow.setVisible(true);
+		// Set up a new board after turn using Facade
+		GameFacade gameFacade = new GameFacade();
+		gameFacade.refreshBoard();
 
 	}
 
