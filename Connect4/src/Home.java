@@ -33,18 +33,9 @@ public class Home extends JFrame {
         // Declaring the button layout
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 50));
 
-        // Creating icons by referencing png files
-        Icon ychip = new ImageIcon(
-            new ImageIcon(getClass().getResource("yellowchip.png"))
-                .getImage()
-                .getScaledInstance(400, 400, Image.SCALE_SMOOTH)
-        );
-
-        Icon rchip = new ImageIcon(
-            new ImageIcon(getClass().getResource("redchip.png"))
-                .getImage()
-                .getScaledInstance(400, 400, Image.SCALE_SMOOTH)
-        );
+        // Creating icons using Flyweight Factory to reuse cached instances
+        Icon rchip = ImageFactory.getScaledIcon("redchip.png", 400, 400);
+        Icon ychip = ImageFactory.getScaledIcon("yellowchip.png", 400, 400);
 
         // Build the play button
         ButtonBuilder startBuilder = new GameButtonBuilder("PLAY");
